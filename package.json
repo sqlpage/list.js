@@ -1,7 +1,7 @@
 {
-  "name": "list.js",
+  "name": "list.js-fixed",
   "version": "2.3.1",
-  "description": "The perfect library for lists. Supports search, sort, filters and flexibility. Built to be invisible and work on existing HTML",
+  "description": "Version of list.js used in SQLPage. Contains bug fixes for sorting and searching.",
   "keywords": [
     "list",
     "search",
