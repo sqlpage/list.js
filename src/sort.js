@@ -96,24 +96,23 @@ module.exports = function (list) {
       }
     } else {
       sortFunction = function (itemA, itemB) {
-        var sort = list.utils.naturalSort
-        sort.alphabet = list.alphabet || options.alphabet || undefined
-        if (!sort.alphabet && options.insensitive) {
-          sort = list.utils.naturalSort.caseInsensitive
-        }
-
         const itemAValue = itemA.values()[options.valueName]
         const itemBValue = itemB.values()[options.valueName]
         if (isFloatString(itemAValue) && isFloatString(itemBValue)) {
-          const multiplier = 10 ** getMaxFloatingPointLengthFromItems(itemAValue, itemBValue) // multiply by max length for making float to integer
+          const valueA = parseFloat(itemAValue)
+          const valueB = parseFloat(itemBValue)
 
-          const valueA = (parseInt(parseFloat(itemAValue) * multiplier)).toString()
-          const valueB = (parseInt(parseFloat(itemBValue) * multiplier)).toString()
-
-          return sort(valueA, valueB) * multi
+          return (valueA - valueB) * multi
         }
 
-        return sort(itemAValue, itemBValue) * multi
+	return list.utils.naturalSort(
+          itemA.values()[options.valueName] + '',
+          itemB.values()[options.valueName] + '',
+          { 
+            caseInsensitive: !sort.alphabet && options.insensitive,
+            alphabet: list.alphabet || options.alphabet || undefined
+          }
+        ) * multi
       }
     }
 
