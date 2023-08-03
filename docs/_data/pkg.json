@@ -1,7 +1,7 @@
 {
-  "name": "list.js",
-  "version": "2.3.1",
-  "description": "The perfect library for lists. Supports search, sort, filters and flexibility. Built to be invisible and work on existing HTML",
+  "name": "list.js-fixed",
+  "version": "2.3.2",
+  "description": "Version of list.js used in SQLPage. Contains bug fixes for sorting and searching.",
   "keywords": [
     "list",
     "search",
@@ -23,7 +23,7 @@
     "url": "https://github.com/javve/list.js/issues"
   },
   "dependencies": {
-    "string-natural-compare": "^2.0.2"
+    "string-natural-compare": "^3.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.7",
