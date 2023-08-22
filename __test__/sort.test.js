@@ -198,6 +198,23 @@ describe('Sort', function () {
       expect(list.items[4].values().val).toBe('0.50')
       expect(list.items[5].values().val).toBe('0.500')
     })
+
+    it('should sort text with dots', function () {
+      i1.values({ val: 'a.b' })
+      i2.values({ val: '.a' })
+      i3.values({ val: '.b' })
+      i4.values({ val: 'a.' })
+      i5.values({ val: 'b.' })
+      i6.values({ val: 'b.a' })
+      list.sort('val', { order: 'asc' })
+      expect(list.items[0].values().val).toBe('.a')
+      expect(list.items[1].values().val).toBe('.b')
+      expect(list.items[2].values().val).toBe('a.')
+      expect(list.items[3].values().val).toBe('a.b')
+      expect(list.items[4].values().val).toBe('b.')
+      expect(list.items[5].values().val).toBe('b.a')
+    })
+
     it('should sort IP addresses', function () {
       i1.values({ val: '192.168.1.1' })
       i2.values({ val: '192.168.0.100' })

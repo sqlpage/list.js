@@ -45,24 +45,7 @@ module.exports = function (list) {
     },
   }
 
-  function isFloatString(value) {
-    if (value === undefined || value === null || !value || typeof value !== 'string' || value.split(".").length !== 2) {
-      return false
-    }
-
-    return !Number.isInteger(parseFloat(value))
-  }
-
-  function getFloatingPointLength(value) {
-    return value.split(".")[1].length
-  }
-
-  function getMaxFloatingPointLengthFromItems(itemA, itemB) {
-    const itemAFloatingNumberLength = getFloatingPointLength(itemA)
-    const itemBFloatingNumberLength = getFloatingPointLength(itemB)
-
-    return Math.max(itemAFloatingNumberLength, itemBFloatingNumberLength)
-  }
+  const floatRegex = /^[+-]?([0-9]*[.])?[0-9]+(e[0-9]+)?$/;
 
   var sort = function () {
     list.trigger('sortStart')
@@ -98,11 +81,9 @@ module.exports = function (list) {
       sortFunction = function (itemA, itemB) {
         const itemAValue = itemA.values()[options.valueName]
         const itemBValue = itemB.values()[options.valueName]
-        if (isFloatString(itemAValue) && isFloatString(itemBValue)) {
-          const valueA = parseFloat(itemAValue)
-          const valueB = parseFloat(itemBValue)
 
-          return (valueA - valueB) * multi
+        if (floatRegex.test(itemAValue) && floatRegex.test(itemBValue)) {
+          return (parseFloat(itemAValue) - parseFloat(itemBValue)) * multi
         }
 
 	return list.utils.naturalSort(
