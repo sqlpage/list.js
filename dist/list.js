@@ -756,20 +756,7 @@ module.exports = function (list) {
       }
     }
   };
-  function isFloatString(value) {
-    if (value === undefined || value === null || !value || typeof value !== 'string' || value.split(".").length !== 2) {
-      return false;
-    }
-    return !Number.isInteger(parseFloat(value));
-  }
-  function getFloatingPointLength(value) {
-    return value.split(".")[1].length;
-  }
-  function getMaxFloatingPointLengthFromItems(itemA, itemB) {
-    var itemAFloatingNumberLength = getFloatingPointLength(itemA);
-    var itemBFloatingNumberLength = getFloatingPointLength(itemB);
-    return Math.max(itemAFloatingNumberLength, itemBFloatingNumberLength);
-  }
+  var floatRegex = /^[+-]?([0-9]*[.])?[0-9]+(e[0-9]+)?$/;
   var sort = function sort() {
     list.trigger('sortStart');
     var options = {};
@@ -801,10 +788,8 @@ module.exports = function (list) {
       sortFunction = function sortFunction(itemA, itemB) {
         var itemAValue = itemA.values()[options.valueName];
         var itemBValue = itemB.values()[options.valueName];
-        if (isFloatString(itemAValue) && isFloatString(itemBValue)) {
-          var valueA = parseFloat(itemAValue);
-          var valueB = parseFloat(itemBValue);
-          return (valueA - valueB) * multi;
+        if (floatRegex.test(itemAValue) && floatRegex.test(itemBValue)) {
+          return (parseFloat(itemAValue) - parseFloat(itemBValue)) * multi;
         }
         return list.utils.naturalSort(itemA.values()[options.valueName] + '', itemB.values()[options.valueName] + '', {
           caseInsensitive: !sort.alphabet && options.insensitive,

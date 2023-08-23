@@ -1,6 +1,6 @@
 {
   "name": "list.js-fixed",
-  "version": "2.3.3",
+  "version": "2.3.4",
   "description": "Version of list.js used in SQLPage. Contains bug fixes for sorting and searching.",
   "keywords": [
     "list",
