@@ -1,6 +1,6 @@
 {
   "name": "list.js-fixed",
-  "version": "2.3.4",
+  "version": "2.3.5",
   "description": "Version of list.js used in SQLPage. Contains bug fixes for sorting and searching.",
   "keywords": [
     "list",
@@ -17,10 +17,10 @@
     "url": "https://javve.com"
   },
   "homepage": "https://listjs.com",
-  "repository": "git://github.com/javve/list.js.git",
+  "repository": "git://github.com/lovasoa/list.js.git",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/javve/list.js/issues"
+    "url": "https://github.com/lovasoa/list.js/issues"
   },
   "dependencies": {
     "string-natural-compare": "^3.0.1"
@@ -65,5 +65,6 @@
       "src/utils/*.js"
     ],
     "testURL": "http://localhost/"
-  }
+  },
+  "types": "index.d.ts"
 }
