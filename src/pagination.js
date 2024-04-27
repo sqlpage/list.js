@@ -7,11 +7,11 @@ module.exports = function (list) {
 
   var refresh = function (pagingList, options) {
     if (list.page < 1) {
-      list.listContainer.style.display = 'none'
+      list.listContainer.classList.add('display_none')
       isHidden = true
       return
     } else if (isHidden) {
-      list.listContainer.style.display = 'block'
+      list.listContainer.classList.remove('display_none')
     }
 
     var item,
