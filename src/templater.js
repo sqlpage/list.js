@@ -140,7 +140,7 @@ var Templater = function (list) {
         values[valueName.name] = elm ? list.utils.getAttribute(elm, valueName.attr) : ''
       } else {
         elm = list.utils.getByClass(item.elm, valueName, true)
-        values[valueName] = elm ? (elm.textContent || elm.innerHTML) : ''
+        values[valueName] = elm ? elm.innerHTML : ''
       }
     }
     return values

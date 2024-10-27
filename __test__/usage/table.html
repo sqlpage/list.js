@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../../dist/list.min.js"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="card my-2">
+      <div class="card-body">
+        <div class="table-responsive" data-pre-init="table">
+          <div class="p-2">
+            <input type="search" class="form-control form-control-rounded fs-6 search" placeholder="Search…" value="" />
+          </div>
+          <table class="table">
+            <thead>
+              <tr>
+                <th class="Forename"><button class="table-sort sort d-inline" data-sort="Forename">Forename</button></th>
+                <th class="Surname"><button class="table-sort sort d-inline" data-sort="Surname">Surname</button></th>
+                <th class="Pseudonym"><button class="table-sort sort d-inline" data-sort="Pseudonym">Pseudonym</button></th>
+              </tr>
+            </thead>
+            <tbody class="table-tbody list">
+              <tr class=" ">
+                <td class="Forename align-middle"><a href="https://x.com/aaronabrams">Aaron</a></td>
+                <td class="Surname align-middle">Abrams</td>
+                <td class="Pseudonym align-middle">aaronabrams</td>
+              </tr>
+
+              <tr class=" ">
+                <td class="Forename align-middle"><a href="https://example.com">Zinédine</a></td>
+                <td class="Surname align-middle">Zidane</td>
+                <td class="Pseudonym align-middle">zizou</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      for (const r of document.querySelectorAll('[data-pre-init=table]')) {
+        const list = new List(r, {
+          valueNames: [...r.getElementsByTagName('th')].map((t) => t.textContent),
+          searchDelay: 100,
+        })
+        const search_input = r.querySelector('input.search')
+        if (search_input && search_input.value) {
+          list.search(search_input.value)
+        }
+        r.removeAttribute('data-pre-init')
+      }
+    </script>
+  </body>
+</html>

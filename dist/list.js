@@ -2,29 +2,29 @@ var List;
 /******/ (function() { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 302:
+/***/ 104:
 /***/ (function(module) {
 
 module.exports = function (list) {
-  var addAsync = function addAsync(values, callback, items) {
+  var _addAsync = function addAsync(values, callback, items) {
     var valuesToAdd = values.splice(0, 50);
     items = items || [];
     items = items.concat(list.add(valuesToAdd));
     if (values.length > 0) {
       setTimeout(function () {
-        addAsync(values, callback, items);
+        _addAsync(values, callback, items);
       }, 1);
     } else {
       list.update();
       callback(items);
     }
   };
-  return addAsync;
+  return _addAsync;
 };
 
 /***/ }),
 
-/***/ 448:
+/***/ 294:
 /***/ (function(module) {
 
 module.exports = function (list) {
@@ -57,15 +57,15 @@ module.exports = function (list) {
 
 /***/ }),
 
-/***/ 277:
+/***/ 503:
 /***/ (function(module, __unused_webpack_exports, __webpack_require__) {
 
-var classes = __webpack_require__(700),
-  events = __webpack_require__(95),
-  extend = __webpack_require__(114),
-  toString = __webpack_require__(757),
-  getByClass = __webpack_require__(153),
-  fuzzy = __webpack_require__(180);
+var classes = __webpack_require__(536),
+  events = __webpack_require__(647),
+  extend = __webpack_require__(766),
+  toString = __webpack_require__(797),
+  getByClass = __webpack_require__(549),
+  fuzzy = __webpack_require__(428);
 module.exports = function (list, options) {
   options = options || {};
   options = extend({
@@ -119,24 +119,24 @@ module.exports = function (list, options) {
 
 /***/ }),
 
-/***/ 352:
+/***/ 954:
 /***/ (function(module, __unused_webpack_exports, __webpack_require__) {
 
-var naturalSort = __webpack_require__(915),
-  getByClass = __webpack_require__(153),
-  extend = __webpack_require__(114),
-  indexOf = __webpack_require__(557),
-  events = __webpack_require__(95),
-  toString = __webpack_require__(757),
-  classes = __webpack_require__(700),
-  getAttribute = __webpack_require__(826),
-  toArray = __webpack_require__(117);
+var naturalSort = __webpack_require__(813),
+  getByClass = __webpack_require__(549),
+  extend = __webpack_require__(766),
+  indexOf = __webpack_require__(164),
+  events = __webpack_require__(647),
+  toString = __webpack_require__(797),
+  classes = __webpack_require__(536),
+  getAttribute = __webpack_require__(665),
+  toArray = __webpack_require__(659);
 module.exports = function (id, options, values) {
   var self = this,
     init,
-    Item = __webpack_require__(423)(self),
-    addAsync = __webpack_require__(302)(self),
-    initPagination = __webpack_require__(664)(self);
+    Item = __webpack_require__(411)(self),
+    addAsync = __webpack_require__(104)(self),
+    initPagination = __webpack_require__(668)(self);
   init = {
     start: function start() {
       self.listClass = 'list';
@@ -172,12 +172,12 @@ module.exports = function (id, options, values) {
         return;
       }
       self.list = getByClass(self.listContainer, self.listClass, true);
-      self.parse = __webpack_require__(805)(self);
-      self.templater = __webpack_require__(561)(self);
-      self.search = __webpack_require__(821)(self);
-      self.filter = __webpack_require__(448)(self);
-      self.sort = __webpack_require__(745)(self);
-      self.fuzzySearch = __webpack_require__(277)(self, options.fuzzySearch);
+      self.parse = __webpack_require__(857)(self);
+      self.templater = __webpack_require__(26)(self);
+      self.search = __webpack_require__(72)(self);
+      self.filter = __webpack_require__(294)(self);
+      self.sort = __webpack_require__(8)(self);
+      self.fuzzySearch = __webpack_require__(503)(self, options.fuzzySearch);
       this.handlers();
       this.items();
       this.pagination();
@@ -374,7 +374,7 @@ module.exports = function (id, options, values) {
 
 /***/ }),
 
-/***/ 423:
+/***/ 411:
 /***/ (function(module) {
 
 module.exports = function (list) {
@@ -427,12 +427,12 @@ module.exports = function (list) {
 
 /***/ }),
 
-/***/ 664:
+/***/ 668:
 /***/ (function(module, __unused_webpack_exports, __webpack_require__) {
 
-var classes = __webpack_require__(700),
-  events = __webpack_require__(95),
-  List = __webpack_require__(352);
+var classes = __webpack_require__(536),
+  events = __webpack_require__(647),
+  List = __webpack_require__(954);
 module.exports = function (list) {
   var isHidden = false;
   var refresh = function refresh(pagingList, options) {
@@ -530,11 +530,11 @@ module.exports = function (list) {
 
 /***/ }),
 
-/***/ 805:
+/***/ 857:
 /***/ (function(module, __unused_webpack_exports, __webpack_require__) {
 
 module.exports = function (list) {
-  var Item = __webpack_require__(423)(list);
+  var Item = __webpack_require__(411)(list);
   var getChildren = function getChildren(parent) {
     var nodes = parent.childNodes,
       items = [];
@@ -551,12 +551,12 @@ module.exports = function (list) {
       list.items.push(new Item(valueNames, itemElements[i]));
     }
   };
-  var parseAsync = function parseAsync(itemElements, valueNames) {
+  var _parseAsync = function parseAsync(itemElements, valueNames) {
     var itemsToIndex = itemElements.splice(0, 50); // TODO: If < 100 items, what happens in IE etc?
     parse(itemsToIndex, valueNames);
     if (itemElements.length > 0) {
       setTimeout(function () {
-        parseAsync(itemElements, valueNames);
+        _parseAsync(itemElements, valueNames);
       }, 1);
     } else {
       list.update();
@@ -568,7 +568,7 @@ module.exports = function (list) {
     var itemsToIndex = getChildren(list.list),
       valueNames = list.valueNames;
     if (list.indexAsync) {
-      parseAsync(itemsToIndex, valueNames);
+      _parseAsync(itemsToIndex, valueNames);
     } else {
       parse(itemsToIndex, valueNames);
     }
@@ -577,7 +577,7 @@ module.exports = function (list) {
 
 /***/ }),
 
-/***/ 821:
+/***/ 72:
 /***/ (function(module) {
 
 module.exports = function (_list) {
@@ -707,7 +707,7 @@ module.exports = function (_list) {
 
 /***/ }),
 
-/***/ 745:
+/***/ 8:
 /***/ (function(module) {
 
 module.exports = function (list) {
@@ -757,7 +757,7 @@ module.exports = function (list) {
     }
   };
   var floatRegex = /^[+-]?([0-9]*[.])?[0-9]+(e[0-9]+)?$/;
-  var sort = function sort() {
+  var _sort = function sort() {
     list.trigger('sortStart');
     var options = {};
     var target = arguments[0].currentTarget || arguments[0].srcElement || undefined; // arg[0] : val, arg[1] : { order: 'asc' }
@@ -792,7 +792,7 @@ module.exports = function (list) {
           return (parseFloat(itemAValue) - parseFloat(itemBValue)) * multi;
         }
         return list.utils.naturalSort(itemA.values()[options.valueName] + '', itemB.values()[options.valueName] + '', {
-          caseInsensitive: !sort.alphabet && options.insensitive,
+          caseInsensitive: !_sort.alphabet && options.insensitive,
           alphabet: list.alphabet || options.alphabet || undefined
         }) * multi;
       };
@@ -806,15 +806,15 @@ module.exports = function (list) {
   list.handlers.sortStart = list.handlers.sortStart || [];
   list.handlers.sortComplete = list.handlers.sortComplete || [];
   buttons.els = list.utils.getByClass(list.listContainer, list.sortClass);
-  list.utils.events.bind(buttons.els, 'click', sort);
+  list.utils.events.bind(buttons.els, 'click', _sort);
   list.on('searchStart', buttons.clear);
   list.on('filterStart', buttons.clear);
-  return sort;
+  return _sort;
 };
 
 /***/ }),
 
-/***/ 561:
+/***/ 26:
 /***/ (function(module) {
 
 var Templater = function Templater(list) {
@@ -947,7 +947,7 @@ var Templater = function Templater(list) {
         values[valueName.name] = elm ? list.utils.getAttribute(elm, valueName.attr) : '';
       } else {
         elm = list.utils.getByClass(item.elm, valueName, true);
-        values[valueName] = elm ? elm.textContent : '';
+        values[valueName] = elm ? elm.innerHTML : '';
       }
     }
     return values;
@@ -999,14 +999,14 @@ module.exports = function (list) {
 
 /***/ }),
 
-/***/ 700:
+/***/ 536:
 /***/ (function(module, __unused_webpack_exports, __webpack_require__) {
 
 /**
  * Module dependencies.
  */
 
-var index = __webpack_require__(557);
+var index = __webpack_require__(164);
 
 /**
  * Whitespace regexp.
@@ -1166,13 +1166,13 @@ ClassList.prototype.has = ClassList.prototype.contains = function (name) {
 
 /***/ }),
 
-/***/ 95:
+/***/ 647:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 var bind = window.addEventListener ? 'addEventListener' : 'attachEvent',
   unbind = window.removeEventListener ? 'removeEventListener' : 'detachEvent',
   prefix = bind !== 'addEventListener' ? 'on' : '',
-  toArray = __webpack_require__(117);
+  toArray = __webpack_require__(659);
 
 /**
  * Bind `el` event `type` to `fn`.
@@ -1238,7 +1238,7 @@ exports.debounce = function (fn, wait, immediate) {
 
 /***/ }),
 
-/***/ 114:
+/***/ 766:
 /***/ (function(module) {
 
 /*
@@ -1261,7 +1261,7 @@ module.exports = function extend(object) {
 
 /***/ }),
 
-/***/ 180:
+/***/ 428:
 /***/ (function(module) {
 
 module.exports = function (text, pattern, options) {
@@ -1381,7 +1381,7 @@ module.exports = function (text, pattern, options) {
 
 /***/ }),
 
-/***/ 826:
+/***/ 665:
 /***/ (function(module) {
 
 /**
@@ -1413,7 +1413,7 @@ module.exports = function (el, attr) {
 
 /***/ }),
 
-/***/ 153:
+/***/ 549:
 /***/ (function(module) {
 
 /**
@@ -1478,7 +1478,7 @@ module.exports = function () {
 
 /***/ }),
 
-/***/ 557:
+/***/ 164:
 /***/ (function(module) {
 
 var indexOf = [].indexOf;
@@ -1492,7 +1492,7 @@ module.exports = function (arr, obj) {
 
 /***/ }),
 
-/***/ 117:
+/***/ 659:
 /***/ (function(module) {
 
 /**
@@ -1529,7 +1529,7 @@ function isArray(arr) {
 
 /***/ }),
 
-/***/ 757:
+/***/ 797:
 /***/ (function(module) {
 
 module.exports = function (s) {
@@ -1541,7 +1541,7 @@ module.exports = function (s) {
 
 /***/ }),
 
-/***/ 915:
+/***/ 813:
 /***/ (function(module) {
 
 "use strict";
@@ -1719,7 +1719,7 @@ module.exports = naturalCompare;
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module is referenced by other modules so it can't be inlined
-/******/ 	var __webpack_exports__ = __webpack_require__(352);
+/******/ 	var __webpack_exports__ = __webpack_require__(954);
 /******/ 	List = __webpack_exports__;
 /******/ 	
 /******/ })()
