@@ -947,7 +947,7 @@ var Templater = function Templater(list) {
         values[valueName.name] = elm ? list.utils.getAttribute(elm, valueName.attr) : '';
       } else {
         elm = list.utils.getByClass(item.elm, valueName, true);
-        values[valueName] = elm ? elm.innerHTML : '';
+        values[valueName] = elm ? elm.textContent : '';
       }
     }
     return values;
