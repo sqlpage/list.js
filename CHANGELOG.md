@@ -1,5 +1,9 @@
 # Changelog
 
+### 2.3.6 - 2024-10-27
+
+- **[Bugfix]** Use textContent or innerHTML to index values. This avoids sorting values based on invisible HTML attributes instead of the actual value.
+
 ### 2.3.1 - 2021-01-17
 
 - - **[Improvement]** #708 Support restored for Node 6, 8, 10 and 12.
